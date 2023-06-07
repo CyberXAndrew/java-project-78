@@ -1,10 +1,16 @@
 .DEFAULT_GOAL := build-run
 
+clean:
+	./gradlew clean
+
 c:
 	./gradlew clean
 
-b:
+build:
 	./gradlew clean build
+
+b:
+	./gradlew build
 
 id:
 	./gradlew installDist
