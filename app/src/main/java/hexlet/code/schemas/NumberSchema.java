@@ -1,25 +1,23 @@
 package hexlet.code.schemas;
 
-//import hexlet.code.schemas.BaseSchema;
-//
-//import java.util.function.Predicate;
+import java.util.function.Predicate;
 
 public class NumberSchema extends BaseSchema {
-//    private boolean constraint = false;
-//    private boolean positive = false;
-//    private int begin;
-//    private int end;
-//    public void required() {
-//        boolean constraint = true;
-//        BaseSchema.addCondition(constraint);
-//    }
-//
-//    public void positive() {
-//        this.positive = true;
-//    }
-//
-//    public void range(int begin, int end) {
-//        this.begin = begin;
-//        this.end = end;
-//    }
+    public NumberSchema required() {
+        Predicate<Object> requiredCondition = x -> x instanceof Integer; //&& !Objects.equals(x, null)
+        conditions.addFirst(requiredCondition);
+        return this;
+    }
+
+    public NumberSchema positive() {
+        Predicate<Object> positiveCondition = x -> ((int) x) > 0;
+        conditions.add(positiveCondition);
+        return this;
+    }
+
+    public NumberSchema range(int begin, int end) {
+        Predicate<Object> rangeCondition = x -> ((int) x) >= begin && ((int) x) <= end;
+        conditions.add(rangeCondition);
+        return this;
+    }
 }

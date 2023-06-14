@@ -18,19 +18,17 @@ public class StringSchemaTest {
     private static final String CORRECT_SUBSTRING = "wh";
     private static final String INCORRECT_SUBSTRING = "wh ";
     private static StringSchema schema;
-//    private static Validator v;
     @BeforeEach
     public void beforeEach() {
-//        v = new Validator();
         schema = Validator.string();
     }
     @Test
     public void beforeRequiredTest() {
-//        assertTrue(schema.isValid(EMPTY_STRING));
-//        assertTrue(schema.isValid(RANDOM_INTEGER));
-//        assertTrue(schema.isValid(NULL));
-//        assertTrue(schema.isValid(RANDOM_STRING));
-//        assertTrue(schema.isValid(OBJECT));
+        assertTrue(schema.isValid(EMPTY_STRING));
+        assertTrue(schema.isValid(RANDOM_INTEGER));
+        assertTrue(schema.isValid(NULL));
+        assertTrue(schema.isValid(RANDOM_STRING));
+        assertTrue(schema.isValid(OBJECT));
     }
 
     @Test
@@ -43,15 +41,25 @@ public class StringSchemaTest {
         assertTrue(schema.isValid(OBJECT));
     }
 
-//    @Test
-//    public void requiredMethodsChainTest() {
-//        schema.required();
-//        assertTrue(schema.contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
-//        assertFalse(schema.contains(INCORRECT_SUBSTRING).isValid(CONTROL_STRING));
-//        assertTrue(schema.minLength(RIGHT_LENGTH).contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
-//        assertFalse(schema.minLength(WRONG_LENGTH).isValid(CONTROL_STRING));
-//        assertFalse(schema.minLength(WRONG_LENGTH).contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
-//        assertFalse(schema.minLength(RIGHT_LENGTH).contains(INCORRECT_SUBSTRING).isValid(CONTROL_STRING));
-//        assertFalse(schema.isValid(CONTROL_STRING));
-//    }
+    @Test
+    public void requiredMethodsChainTest() {
+        schema.required();
+        assertTrue(schema.contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
+
+        schema = Validator.string().required();
+        assertFalse(schema.contains(INCORRECT_SUBSTRING).isValid(CONTROL_STRING));
+
+        schema = Validator.string().required();
+        assertTrue(schema.minLength(RIGHT_LENGTH).contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
+
+        schema = Validator.string().required();
+        assertFalse(schema.minLength(WRONG_LENGTH).isValid(CONTROL_STRING));
+
+        schema = Validator.string().required();
+        assertTrue(schema.minLength(RIGHT_LENGTH).contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
+
+        schema = Validator.string().required();
+        assertTrue(schema.minLength(RIGHT_LENGTH).contains(CORRECT_SUBSTRING).isValid(CONTROL_STRING));
+        assertFalse(schema.contains(INCORRECT_SUBSTRING).isValid(CONTROL_STRING));
+    }
 }
