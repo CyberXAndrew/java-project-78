@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 
 public class StringSchema extends BaseSchema {
     public StringSchema required() {
-        Predicate<Object> required = x -> !Objects.equals(x, null) && !Objects.equals(x, "");
-        conditions.addFirst(required);
+        Predicate<Object> requiredCondition = x -> !Objects.equals(x, null) && !Objects.equals(x, "");
+        conditions.addFirst(requiredCondition);
         return this;
     }
     public StringSchema minLength(int number) {

@@ -12,7 +12,7 @@ public class NumberSchemaTest {
     private static final Object ZERO = 0;
     private static final Object NEGATIVE_NUMBER = -3;
     private static final Object STRING = "5";
-    private NumberSchema schema;
+    private static NumberSchema schema;
     @BeforeEach
     public void beforeEach() {
         schema = Validator.number();

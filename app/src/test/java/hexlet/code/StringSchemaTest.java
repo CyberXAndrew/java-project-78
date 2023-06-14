@@ -17,7 +17,7 @@ public class StringSchemaTest {
     private static final String CONTROL_STRING = "what does";
     private static final String CORRECT_SUBSTRING = "wh";
     private static final String INCORRECT_SUBSTRING = "wh ";
-    private static StringSchema schema;
+    private StringSchema schema;
     @BeforeEach
     public void beforeEach() {
         schema = Validator.string();
