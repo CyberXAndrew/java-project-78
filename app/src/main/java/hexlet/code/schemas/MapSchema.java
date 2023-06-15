@@ -15,4 +15,14 @@ public class MapSchema extends BaseSchema {
         conditions.add(sizeCondition);
         return this;
     }
+
+    public MapSchema shape(Map<String, BaseSchema> map) {
+        mapConditions.putAll(map);
+//        conditions.add(map.values().stream()
+//                .map();
+//        //.conditions.stream()
+//                        //.allMatch(condition -> condition.test(((Map<?, ?>) o).get(key))));
+//        }
+        return this;
+    }
 }

@@ -8,11 +8,9 @@ public class Validator {
     protected static StringSchema string() {
         return new StringSchema();
     }
-
     protected static NumberSchema number() {
         return new NumberSchema();
     }
-
     protected static MapSchema map() {
         return new MapSchema();
     }
