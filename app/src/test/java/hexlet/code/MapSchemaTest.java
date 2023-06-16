@@ -19,12 +19,12 @@ public final class MapSchemaTest {
     private static final Map<String, String> THREE_PAIR_MAP = new HashMap<>(Map.of("key1", "value1", "key2",
             "value2", "key3", "value3"));
     private static final int EXAMPLE_SIZE = 2;
-    public MapSchema schema;
-    public Map<String, BaseSchema> schemas;
-    Map<String, Object> human1 = new HashMap<>();
-    Map<String, Object> human2 = new HashMap<>();
-    Map<String, Object> human3 = new HashMap<>();
-    Map<String, Object> human4 = new HashMap<>();
+    private MapSchema schema;
+    private Map<String, BaseSchema> schemas;
+    private final Map<String, Object> human1 = new HashMap<>();
+    private final Map<String, Object> human2 = new HashMap<>();
+    private final Map<String, Object> human3 = new HashMap<>();
+    private final Map<String, Object> human4 = new HashMap<>();
 
     @BeforeEach
     public void beforeEach() {
