@@ -18,26 +18,30 @@ public class MapSchemaTest {
             "key2", "value2"));
     private static final Map<String, String> THREE_PAIR_MAP = new HashMap<>(Map.of("key1", "value1", "key2",
             "value2", "key3", "value3"));
-//    private final Map<String, Object> HUMAN_1 = new HashMap<>(Map.of("name", "Kolya", "age", 100));
-//    private final Map<String, Object> HUMAN_2 = new HashMap<>(Map.of("name", "Maya", "age", null));
-//    private final Map<String, Object> HUMAN_3 = new HashMap<>(Map.of("name", "", "age", null));
-//    private final Map<String, Object> HUMAN_4 = new HashMap<>(Map.of("name", "Valya", "age", -5));
     private static final int EXAMPLE_SIZE = 2;
     public MapSchema schema;
     public Map<String, BaseSchema> schemas;
-    Map<String, Object> human1;
-    Map<String, Object> human2;
-    Map<String, Object> human3;
-    Map<String, Object> human4;
+    Map<String, Object> human1 = new HashMap<>();
+    Map<String, Object> human2 = new HashMap<>();
+    Map<String, Object> human3 = new HashMap<>();
+    Map<String, Object> human4 = new HashMap<>();
 
     @BeforeEach
     public void beforeEach() {
         schema = Validator.map();
         schemas = new HashMap<>();
-        human1 = Map.of("name", "Kolya", "age", 100);
-        human2 = Map.of("name", "Maya", "age", null);
-        human3 = Map.of("name", "", "age", null);
-        human4 = Map.of("name", "Valya", "age", -5);
+
+        human1.put("name", "Kolya");
+        human1.put("age", 100);
+
+        human2.put("name", "Maya");
+        human2.put("age", null);
+
+        human3.put("name", "");
+        human3.put("age", null);
+
+        human4.put("name", "Valya");
+        human4.put("age", -5);
     }
 
     @Test
@@ -64,31 +68,30 @@ public class MapSchemaTest {
     }
 
     @Test
-    public void nestedObjectsTest1() {   // NULL были заменены
-        schemas.putAll(Map.of("name", Validator.string().required(), "age", Validator.number().positive()));
+    public void nestedObjectsTest1() {
+        schemas.put("name", Validator.string().required());
+        schemas.put("age", Validator.number().positive());
         schema.shape(schemas);
-        human2.put("name", "Maya");
-        human2.put("age", null);
-        assertTrue(schema.isValid(human1));
-        assertTrue(schema.isValid(human2));
-        assertFalse(schema.isValid(human3));
-        assertFalse(schema.isValid(human4));
+        assertTrue(schema.isValid(human1)); //kolya 100
+        assertTrue(schema.isValid(human2)); //maya null
+        assertFalse(schema.isValid(human3)); // "" null
+        assertFalse(schema.isValid(human4)); //valya -5
     }
     @Test
-    public void nestedObjectsTest2() { // NULL были заменены
-        schemas.putAll(Map.of("name", Validator.string().required().contains("lya"), "age", Validator.number()
-                .range(-1, 8)));
+    public void nestedObjectsTest2() {
+        schemas.put("name", Validator.string().contains("lya"));
+        schemas.put("age", Validator.number().range(-5, 8));
         schema.shape(schemas);
         assertFalse(schema.isValid(human1));
-//        assertFalse(schema.isValid(human2));
-        assertFalse(schema.isValid(human4));
+        assertFalse(schema.isValid(human2));
+        assertFalse(schema.isValid(human3));
+        assertTrue(schema.isValid(human4));
     }
     @Test
-    public void nestedObjectsTest3() { // NULL были заменены
-        schemas.putAll(Map.of("name", Validator.string().required().contains("lya"), "age", Validator.number()
-                .range(-1, 100)));
-        schema.shape(schemas);
-        assertTrue(schema.isValid(human1));
+    public void nestedObjectsTest3() {
+        schemas.put("name", Validator.string());
+        schemas.put("age", Validator.number().range(-1, 100));
+        assertTrue(schema.shape(schemas).isValid(human3));
         assertFalse(schema.isValid(human4));
     }
 }

@@ -10,13 +10,13 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema positive() {
-        Predicate<Object> positiveCondition = x -> ((int) x) > 0;
+        Predicate<Object> positiveCondition = x -> x == null || ((Integer) x) > 0;
         conditions.add(positiveCondition);
         return this;
     }
 
     public NumberSchema range(int begin, int end) {
-        Predicate<Object> rangeCondition = x -> ((int) x) >= begin && ((int) x) <= end;
+        Predicate<Object> rangeCondition = x -> x == null || ((Integer) x) >= begin && ((Integer) x) <= end;
         conditions.add(rangeCondition);
         return this;
     }

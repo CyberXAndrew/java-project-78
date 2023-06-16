@@ -32,7 +32,7 @@ public class StringSchemaTest {
     }
 
     @Test
-    public void requiredIsValidTest() { //required = x -> !Objects.equals(x, null) && !Objects.equals(x, "")
+    public void requiredIsValidTest() {
         schema.required();
         assertFalse(schema.isValid(EMPTY_STRING));
         assertTrue(schema.isValid(RANDOM_INTEGER));

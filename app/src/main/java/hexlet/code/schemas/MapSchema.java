@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
-    //    protected Map<String, BaseSchema> mapConditions = new HashMap<>();
     public MapSchema required() {
         Predicate<Object> requiredCondition = x -> x instanceof Map;
         conditions.addFirst(requiredCondition);
@@ -19,7 +18,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema shape(Map<String, BaseSchema> map) {
-        map.keySet().forEach(key -> conditions.add(o -> map.get(key).isValid(o)));
+        map.keySet().forEach(key -> conditions.add(o -> map.get(key).isValid(((Map<?, ?>) o).get(key))));
         return this;
     }
 }
