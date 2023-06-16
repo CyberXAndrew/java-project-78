@@ -5,13 +5,13 @@ import hexlet.code.schemas.StringSchema;
 import hexlet.code.schemas.MapSchema;
 
 public class Validator {
-    protected static StringSchema string() {
+    public static StringSchema string() {
         return new StringSchema();
     }
-    protected static NumberSchema number() {
+    public static NumberSchema number() {
         return new NumberSchema();
     }
-    protected static MapSchema map() {
+    public static MapSchema map() {
         return new MapSchema();
     }
 }
