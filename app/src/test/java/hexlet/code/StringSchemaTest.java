@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StringSchemaTest {
+public final class StringSchemaTest {
     private static final String EMPTY_STRING = "";
     private static final String NULL = null;
     private static final int RANDOM_INTEGER = 7;

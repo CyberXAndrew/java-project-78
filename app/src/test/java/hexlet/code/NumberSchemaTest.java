@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class NumberSchemaTest {
+public final class NumberSchemaTest {
     private static final Object NULL = null;
     private static final Object POSITIVE_NUMBER = 8;
     private static final Object ZERO = 0;

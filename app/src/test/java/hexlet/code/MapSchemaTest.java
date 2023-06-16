@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Map;
 import java.util.HashMap;
 
-public class MapSchemaTest {
+public final class MapSchemaTest {
     private static final String NULL = null;
     private static final Map<String, String> EMPTY_MAP = new HashMap<>();
     private static final Map<String, String> ONE_PAIR_MAP = new HashMap<>(Map.of("key1", "value1"));
