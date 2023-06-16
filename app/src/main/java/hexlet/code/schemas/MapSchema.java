@@ -11,7 +11,7 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema sizeOf(int number) {
+    public MapSchema sizeof(int number) {
         Predicate<Object> sizeCondition = x -> ((Map<?, ?>) x).size() == number;
         conditions.add(sizeCondition);
         return this;

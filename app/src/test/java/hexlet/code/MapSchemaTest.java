@@ -61,7 +61,7 @@ public class MapSchemaTest {
     @Test
     public void sizeOfTest() {
         schema.required();
-        assertFalse(schema.sizeOf(EXAMPLE_SIZE).isValid(EMPTY_MAP));
+        assertFalse(schema.sizeof(EXAMPLE_SIZE).isValid(EMPTY_MAP));
         assertFalse(schema.isValid(ONE_PAIR_MAP));
         assertFalse(schema.isValid(THREE_PAIR_MAP));
         assertTrue(schema.isValid(TWO_PAIR_MAP));
