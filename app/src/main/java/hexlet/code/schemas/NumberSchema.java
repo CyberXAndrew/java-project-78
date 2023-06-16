@@ -16,8 +16,8 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema range(int begin, int end) {
-        Predicate<Object> rangeCondition = x -> x == null || x instanceof Integer && ((Integer) x) >= begin &&
-                ((Integer) x) <= end;
+        Predicate<Object> rangeCondition = x -> x == null || x instanceof Integer && ((Integer) x) >= begin
+                && ((Integer) x) <= end;
         addCondition(rangeCondition);
         return this;
     }
