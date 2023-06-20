@@ -7,11 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class NumberSchemaTest {
-    private static final Object NULL = null;
     private static final Object POSITIVE_NUMBER = 8;
     private static final Object ZERO = 0;
     private static final Object NEGATIVE_NUMBER = -3;
-    private static final Object STRING = "5";
+    private static final Object RANDOM_NUMBER = 5;
     private static NumberSchema schema;
     @BeforeEach
     public void beforeEach() {
@@ -19,17 +18,17 @@ public final class NumberSchemaTest {
     }
     @Test
     public void beforeRequiredTest() {
-        assertTrue(schema.isValid(NULL));
-        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(RANDOM_NUMBER));
     }
 
     @Test
     public void requiredTest() {
         schema.required();
-        assertFalse(schema.isValid(NULL));
+        assertFalse(schema.isValid(null));
         assertTrue(schema.isValid(POSITIVE_NUMBER));
         assertTrue(schema.isValid(NEGATIVE_NUMBER));
-        assertFalse(schema.isValid(STRING));
+        assertFalse(schema.isValid("5"));
     }
 
     @Test
@@ -53,8 +52,10 @@ public final class NumberSchemaTest {
     @Test
     public void requiredMethodsChainTest() {
         schema.required();
-        assertTrue(schema.positive().isValid(POSITIVE_NUMBER));
-        assertTrue(schema.range(-4, 9).isValid(POSITIVE_NUMBER));
+        schema.positive();
+        assertTrue(schema.isValid(POSITIVE_NUMBER));
+        schema.range(-4, 9);
+        assertTrue(schema.isValid(POSITIVE_NUMBER));
         assertFalse(schema.isValid(NEGATIVE_NUMBER));
     }
 }

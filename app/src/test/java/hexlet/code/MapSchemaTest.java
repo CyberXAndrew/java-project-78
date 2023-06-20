@@ -11,13 +11,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 public final class MapSchemaTest {
-    private static final String NULL = null;
-    private static final Map<String, String> EMPTY_MAP = new HashMap<>();
-    private static final Map<String, String> ONE_PAIR_MAP = new HashMap<>(Map.of("key1", "value1"));
-    private static final Map<String, String> TWO_PAIR_MAP = new HashMap<>(Map.of("key1", "value1",
-            "key2", "value2"));
-    private static final Map<String, String> THREE_PAIR_MAP = new HashMap<>(Map.of("key1", "value1", "key2",
-            "value2", "key3", "value3"));
     private static final int EXAMPLE_SIZE = 2;
     private MapSchema schema;
     private Map<String, BaseSchema> schemas;
@@ -46,25 +39,29 @@ public final class MapSchemaTest {
 
     @Test
     public void beforeRequired() {
-        assertTrue(schema.isValid(NULL));
-        assertTrue(schema.isValid(EMPTY_MAP));
-        assertTrue(schema.isValid(THREE_PAIR_MAP));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(new HashMap<>()));
+        assertTrue(schema.isValid(new HashMap<>(Map.of("key1", "value1", "key2",
+            "value2", "key3", "value3"))));
     }
 
     @Test
     public void requiredTest() {
-        assertFalse(schema.required().isValid(NULL));
-        assertTrue(schema.isValid(EMPTY_MAP));
-        assertTrue(schema.isValid(TWO_PAIR_MAP));
+        assertFalse(schema.required().isValid(null));
+        assertTrue(schema.isValid(new HashMap<>()));
+        assertTrue(schema.isValid(new HashMap<>(Map.of("key1", "value1",
+            "key2", "value2"))));
     }
 
     @Test
     public void sizeOfTest() {
         schema.required();
-        assertFalse(schema.sizeof(EXAMPLE_SIZE).isValid(EMPTY_MAP));
-        assertFalse(schema.isValid(ONE_PAIR_MAP));
-        assertFalse(schema.isValid(THREE_PAIR_MAP));
-        assertTrue(schema.isValid(TWO_PAIR_MAP));
+        assertFalse(schema.sizeof(EXAMPLE_SIZE).isValid(new HashMap<>()));
+        assertFalse(schema.isValid(new HashMap<>(Map.of("key1", "value1"))));
+        assertFalse(schema.isValid(new HashMap<>(Map.of("key1", "value1", "key2",
+            "value2", "key3", "value3"))));
+        assertTrue(schema.isValid(new HashMap<>(Map.of("key1", "value1",
+            "key2", "value2"))));
     }
 
     @Test
@@ -91,7 +88,8 @@ public final class MapSchemaTest {
     public void nestedObjectsTest3() {
         schemas.put("name", Validator.string());
         schemas.put("age", Validator.number().range(-1, 100));
-        assertTrue(schema.shape(schemas).isValid(human3));
+        schema.shape(schemas);
+        assertTrue(schema.isValid(human3));
         assertFalse(schema.isValid(human4));
     }
 }
